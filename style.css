@@ -330,6 +330,7 @@ footer {
   padding: 8px 16px;
   border-radius: 6px;
   transition: background 0.3s, color 0.3s;
+  background-color: #333
 }
 
 .cv-download-link:hover {

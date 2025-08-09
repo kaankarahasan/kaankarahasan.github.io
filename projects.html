@@ -72,8 +72,27 @@
     </section>
   </main>
 
+  <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">↑</button>
+
   <footer>
     <p>&copy; 2025 Kaan Karahasan All Rights Reserved.</p>
   </footer>
+
+  <script>
+    const scrollBtn = document.getElementById("scrollTopBtn");
+
+    window.onscroll = () => {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        scrollBtn.style.display = "block";
+      } else {
+        scrollBtn.style.display = "none";
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+
 </body>
 </html>
