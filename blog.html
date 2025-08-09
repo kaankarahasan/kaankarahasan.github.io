@@ -5,44 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Blog - Kaan Karahasan</title>
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
 
   <!-- Fira Code font -->
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet" />
-
-  <!-- FontAwesome 6 CDN -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-pZckFKG2ShTPM17Q6qM68fqHIdkGZfwCgCTeLJQg9QuB/ZG8TxGjc1g9mGlpPuyxijHEOK6vQLa2+r/jF1fXbA=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="header">
-    <nav class="nav-left">
+    <nav class="nav-left" id="nav-left">
       <a href="index.html#home">home</a>
       <a href="projects.html">projects</a>
       <a href="blog.html#blog">blog</a>
-      <a href="about.html#about" class="active">about</a>
+      <a href="about.html#about">about</a>
       <a href="contact.html#contact">contact</a>
     </nav>
+
+    <!-- Hamburger Menü Butonu -->
+    <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
     <nav class="nav-right">
-        <a href="https://www.instagram.com/karahasankaan/" target="_blank" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://github.com/kaankarahasan" target="_blank" aria-label="GitHub">
-            <i class="fab fa-github"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/kaankarahasan" target="_blank" aria-label="LinkedIn">
-            <i class="fab fa-linkedin"></i>
-        </a>
+      <a href="https://www.instagram.com/karahasankaan/" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://github.com/kaankarahasan" target="_blank" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/kaankarahasan" target="_blank" aria-label="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
     </nav>
   </header>
 
@@ -55,11 +54,30 @@
 
   </main>
 
+  <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">↑</button>
+
   <footer>
     <p>&copy; 2025 Kaan Karahasan All Rights Reserved.</p>
   </footer>
 
   <script>
+    const scrollBtn = document.getElementById("scrollTopBtn");
+
+    window.onscroll = () => {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        scrollBtn.style.display = "block";
+      } else {
+        scrollBtn.style.display = "none";
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+
+  <script>
+    // Aktif sayfa navbar vurgulama
     const navLinks = document.querySelectorAll('.nav-left a');
     const currentPage = window.location.pathname + window.location.hash;
 
@@ -70,6 +88,21 @@
         link.classList.add('active');
       } else {
         link.classList.remove('active');
+      }
+    });
+
+    // Hamburger menü aç/kapa
+    const hamburger = document.getElementById('hamburger');
+    const navLeft = document.getElementById('nav-left');
+
+    hamburger.addEventListener('click', () => {
+      navLeft.classList.toggle('active');
+    });
+
+    hamburger.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        navLeft.classList.toggle('active');
       }
     });
   </script>

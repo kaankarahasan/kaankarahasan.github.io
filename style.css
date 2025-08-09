@@ -356,6 +356,56 @@ footer {
   color: #fff;
 }
 
+/* Hamburger Menü Butonu */
+.hamburger {
+  display: none; /* Desktop'ta gizli */
+  flex-direction: column;
+  cursor: pointer;
+  width: 30px;
+  height: 22px;
+  justify-content: space-between;
+}
+
+.hamburger span {
+  display: block;
+  height: 4px;
+  background-color: #f1f1f1;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Hamburger Menü Açıldığında Animasyon */
+.nav-left.active {
+  display: flex !important;
+  flex-direction: column;
+  position: fixed;
+  top: 60px; /* header yüksekliği kadar aşağıda */
+  left: 0;
+  right: 0;
+  background-color: #111;
+  padding: 15px 0;
+  z-index: 999;
+  gap: 15px;
+  border-top: 1px solid #222;
+}
+
+/* Mobilde gizli olacak nav-left normalde */
+@media screen and (max-width: 600px) {
+  .nav-left {
+    display: none;
+    width: 100%;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Nav-right ikonlarını biraz küçült ve sağa yasla */
+  .nav-right {
+    gap: 15px;
+  }
+}
+
 /* Scroll to top butonu */
 #scrollTopBtn {
   position: fixed;
