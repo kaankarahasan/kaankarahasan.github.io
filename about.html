@@ -27,7 +27,7 @@
       <a href="index.html#home">home</a>
       <a href="projects.html">projects</a>
       <a href="blog.html#blog">blog</a>
-      <a href="about.html" class="active">about</a>
+      <a href="about.html#about" class="active">about</a>
       <a href="contact.html#contact">contact</a>
     </nav>
     <nav class="nav-right">
@@ -155,5 +155,21 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   </script>
+
+  <script>
+    const navLinks = document.querySelectorAll('.nav-left a');
+    const currentPage = window.location.pathname + window.location.hash;
+
+    navLinks.forEach(link => {
+      const linkPage = new URL(link.href).pathname + new URL(link.href).hash;
+
+      if (linkPage === currentPage) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  </script>
+  
 </body>
 </html>

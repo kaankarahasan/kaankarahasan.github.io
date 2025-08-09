@@ -8,12 +8,14 @@ html, body {
   background-color: #111;
   color: #f1f1f1;
   font-family: 'Fira Code', monospace;
+  font-size: 16px;
 }
 
 /* İçeriği saran main container */
 main.container {
   flex: 1;
   max-width: 600px;
+  width: 90%;
   margin: 100px auto 0 auto;
   padding: 20px;
   display: flex;
@@ -74,10 +76,16 @@ main.container {
   color: #0a84ff;
 }
 
+.nav-left a.active {
+  color: #0a84ff;
+}
+
 /* Responsive */
 @media screen and (max-width: 600px) {
   .header {
     padding: 10px 15px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .nav-left a,
@@ -89,8 +97,8 @@ main.container {
     font-size: 1.2rem;
   }
 
-  .container {
-    max-width: 90%;
+  main.container {
+    max-width: 100%;
     margin: 80px auto 0 auto;
     padding: 15px 20px;
   }
@@ -107,7 +115,7 @@ main.container {
 .contact-heading {
   font-size: 2.5rem;
   margin-bottom: 30px;
-  border-bottom: 2px solid #f1f1f1; /* Beyaz alt çizgi */
+  border-bottom: 2px solid #f1f1f1;
   display: inline-block;
   padding-bottom: 5px;
 }
@@ -135,16 +143,19 @@ main.container {
 
 .contact-form {
   max-width: 600px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 15px;
   padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .contact-form textarea {
-  width: 500px;         /* Genişliği container kadar yapar */
-  height: 100px;   
+  width: 100%;
+  max-width: 100%;
+  height: 100px;
   resize: vertical;
   padding: 12px;
   font-family: 'Fira Code', monospace;
@@ -153,9 +164,12 @@ main.container {
   border-radius: 10px;
   background-color: #333;
   color: #f1f1f1;
+  box-sizing: border-box;
 }
 
 .contact-form input[type="email"] {
+  width: 100%;
+  max-width: 100%;
   padding: 12px;
   font-family: 'Fira Code', monospace;
   font-size: 1rem;
@@ -163,6 +177,7 @@ main.container {
   border-radius: 10px;
   background-color: #333;
   color: #f1f1f1;
+  box-sizing: border-box;
 }
 
 .contact-form button {
@@ -175,6 +190,8 @@ main.container {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
+  max-width: 150px;
+  align-self: center;
 }
 
 .contact-form button:hover {
@@ -187,12 +204,11 @@ main.container {
   font-style: italic;
   margin-top: 0.75rem;
   width: 100%;
-  max-width: 500px; /* form input'larınki neyse o kadar yap */
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  text-align: center; /* istersen center da yapabilirsin */
+  text-align: center;
 }
-
 
 /* Profil resmi */
 .profile-photo {
@@ -201,6 +217,8 @@ main.container {
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 30px;
+  max-width: 90vw;
+  max-height: 90vw;
 }
 
 /* Animasyon */

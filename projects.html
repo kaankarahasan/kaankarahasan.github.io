@@ -94,5 +94,20 @@
     }
   </script>
 
+  <script>
+    const navLinks = document.querySelectorAll('.nav-left a');
+    const currentPage = window.location.pathname + window.location.hash;
+
+    navLinks.forEach(link => {
+      const linkPage = new URL(link.href).pathname + new URL(link.href).hash;
+
+      if (linkPage === currentPage) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  </script>
+
 </body>
 </html>
