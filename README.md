@@ -60,7 +60,7 @@ This project is personal and not open to contributions at this time.
 
 ## 📫 Contact
 
-Feel free to reach out via [karahasankaan@gmail.com](mailto:karahasankaan@gmail.com) or through the [contact form](https://kaankarahasan.github.io/contact.html) on the site.
+Feel free to reach out via [kaankarahasan@yahoo.com](mailto:kaankarahasan@yahoo.com) or through the [contact form](https://kaankarahasan.github.io/contact.html) on the site.
 
 ---
 
