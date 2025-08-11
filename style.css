@@ -41,12 +41,19 @@ main.container {
   right: 0;
   background-color: #111;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start; /* Hamburger ve menü sola hizalı */
   align-items: center;
   padding: 15px 30px;
   z-index: 1000;
-  box-shadow: none;
   border-bottom: none;
+}
+
+/* Menü kapsayıcısı */
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
 }
 
 .nav-left,
@@ -80,17 +87,59 @@ main.container {
   color: #0a84ff;
 }
 
-/* Responsive */
+/* Hamburger Menü Butonu */
+.hamburger {
+  display: none; /* Desktop'ta gizli */
+  flex-direction: column;
+  cursor: pointer;
+  width: 30px;
+  height: 22px;
+  justify-content: space-between;
+  margin-right: 20px; /* Menüden biraz ayrık */
+}
+
+.hamburger span {
+  display: block;
+  height: 4px;
+  background-color: #f1f1f1;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Mobil görünüm */
 @media screen and (max-width: 600px) {
-  .header {
-    padding: 10px 15px;
-    flex-wrap: wrap;
-    justify-content: center;
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 60px; /* header yüksekliği */
+    left: 0;
+    right: 0;
+    background-color: #111;
+    padding: 15px 0;
+    gap: 15px;
+    border-top: 1px solid #222;
+    z-index: 999;
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .nav-left,
+  .nav-right {
+    flex-direction: column;
+    gap: 15px;
   }
 
   .nav-left a,
   .nav-right a {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .nav-right a i {
@@ -105,7 +154,6 @@ main.container {
 }
 
 /* CONTACT SAYFASI */
-
 .contact-container {
   text-align: center;
   margin-top: 100px;
@@ -120,7 +168,7 @@ main.container {
   padding-bottom: 5px;
 }
 
-/* İKONLAR - ÇERÇEVESİZ HALİ */
+/* İKONLAR */
 .icon-wrapper {
   display: flex;
   justify-content: center;
@@ -140,7 +188,6 @@ main.container {
 }
 
 /* FORM */
-
 .contact-form {
   max-width: 600px;
   width: 100%;
@@ -152,21 +199,7 @@ main.container {
   box-sizing: border-box;
 }
 
-.contact-form textarea {
-  width: 100%;
-  max-width: 100%;
-  height: 100px;
-  resize: vertical;
-  padding: 12px;
-  font-family: 'Fira Code', monospace;
-  font-size: 1rem;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  background-color: #333;
-  color: #f1f1f1;
-  box-sizing: border-box;
-}
-
+.contact-form textarea,
 .contact-form input[type="email"] {
   width: 100%;
   max-width: 100%;
@@ -178,6 +211,11 @@ main.container {
   background-color: #333;
   color: #f1f1f1;
   box-sizing: border-box;
+}
+
+.contact-form textarea {
+  height: 100px;
+  resize: vertical;
 }
 
 .contact-form button {
@@ -233,41 +271,32 @@ main.container {
   }
 }
 
-/* Başlık */
-.intro-heading {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-.about-heading {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #f1f1f1;
-}
-
+/* Başlıklar */
+.intro-heading,
+.about-heading,
 .blog-heading {
   font-size: 2rem;
   margin-bottom: 20px;
+}
+
+.about-heading,
+.blog-heading {
   border-bottom: 2px solid #f1f1f1;
 }
 
-.intro-paragraph {
+.intro-paragraph,
+.internship-paragraph,
+.about-projects-paragraph,
+.about-volunteer-paragraph {
+  text-indent: 2em;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  text-align: left;
   max-width: 600px;
   margin: 0 auto 1.5rem auto;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  text-align: left;
-  text-indent: 2em;
 }
 
-/* Blog paragrafı */
-.blog-paragraph {
-  text-align: center;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
+.blog-paragraph,
 .projects-paragraph {
   text-align: center;
   font-size: 1.1rem;
@@ -302,33 +331,6 @@ main.container {
   border-bottom-color: #0a84ff;
 }
 
-.internship-paragraph {
-  text-indent: 2em;
-  line-height: 1.6;
-  font-size: 1.1rem;
-  text-align: left;
-  max-width: 600px;
-  margin: 0 auto 1.5rem auto;
-}
-
-.about-projects-paragraph {
-  text-indent: 2em;
-  line-height: 1.6;
-  font-size: 1.1rem;
-  text-align: left;
-  max-width: 600px;
-  margin: 0 auto 1.5rem auto;
-}
-
-.about-volunteer-paragraph {
-  text-indent: 2em;
-  line-height: 1.6;
-  font-size: 1.1rem;
-  text-align: left;
-  max-width: 600px;
-  margin: 0 auto 1.5rem auto;
-}
-
 /* Footer */
 footer {
   text-align: center;
@@ -348,62 +350,12 @@ footer {
   padding: 8px 16px;
   border-radius: 6px;
   transition: background 0.3s, color 0.3s;
-  background-color: #333
+  background-color: #333;
 }
 
 .cv-download-link:hover {
   background-color: #0a84ff;
   color: #fff;
-}
-
-/* Hamburger Menü Butonu */
-.hamburger {
-  display: none; /* Desktop'ta gizli */
-  flex-direction: column;
-  cursor: pointer;
-  width: 30px;
-  height: 22px;
-  justify-content: space-between;
-}
-
-.hamburger span {
-  display: block;
-  height: 4px;
-  background-color: #f1f1f1;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-/* Hamburger Menü Açıldığında Animasyon */
-.nav-left.active {
-  display: flex !important;
-  flex-direction: column;
-  position: fixed;
-  top: 60px; /* header yüksekliği kadar aşağıda */
-  left: 0;
-  right: 0;
-  background-color: #111;
-  padding: 15px 0;
-  z-index: 999;
-  gap: 15px;
-  border-top: 1px solid #222;
-}
-
-/* Mobilde gizli olacak nav-left normalde */
-@media screen and (max-width: 600px) {
-  .nav-left {
-    display: none;
-    width: 100%;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-
-  /* Nav-right ikonlarını biraz küçült ve sağa yasla */
-  .nav-right {
-    gap: 15px;
-  }
 }
 
 /* Scroll to top butonu */
