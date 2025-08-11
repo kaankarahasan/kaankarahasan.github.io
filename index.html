@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kaan Karahasan</title>
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png" />
@@ -56,10 +53,9 @@
     
     <h1 class="intro-heading">hi, it's Kaan! 🖖</h1>
 
-   <p class="intro-paragraph">
-    I am a computer engineering student who enjoys building meaningful things with code. Passionate about learning, designing, and creating — especially in mobile development and backend systems. Always curious, always building.
+    <p class="intro-paragraph">
+      I am a computer engineering student who enjoys building meaningful things with code. Passionate about learning, designing, and creating — especially in mobile development and backend systems. Always curious, always building.
     </p>
-
   </main>
 
   <footer>
@@ -73,7 +69,6 @@
 
     navLinks.forEach(link => {
       const linkPage = new URL(link.href).pathname + new URL(link.href).hash;
-
       if (linkPage === currentPage) {
         link.classList.add('active');
       } else {
