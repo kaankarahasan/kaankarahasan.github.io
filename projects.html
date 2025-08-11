@@ -158,7 +158,27 @@
         document.body.classList.toggle('menu-open');
       });
 
-    // ESC ile kapatma
+    // Menü dışına tıklayınca kapatma
+    document.addEventListener('click', (event) => {
+      const isClickInsideMenu = navMenu.contains(event.target);
+      const isClickOnHamburger = hamburger.contains(event.target);
+
+      if (!isClickInsideMenu && !isClickOnHamburger && navMenu.classList.contains('active')) {
+        toggleMenu();
+      }
+    });
+
+    // Menü dışına tıklayınca kapatma
+    document.addEventListener('click', (event) => {
+      const isClickInsideMenu = navMenu.contains(event.target);
+      const isClickOnHamburger = hamburger.contains(event.target);
+
+      if (!isClickInsideMenu && !isClickOnHamburger && navMenu.classList.contains('active')) {
+        toggleMenu();
+      }
+    });
+
+    // ESC tuşuyla menü kapatma
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && navMenu.classList.contains('active')) {
         toggleMenu();

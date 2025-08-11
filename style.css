@@ -26,7 +26,7 @@ main.container {
   max-width: 600px;
   width: 90%;
   margin: calc(var(--header-height) + 40px) auto 0 auto;
-  padding: 20px;
+  padding: 20px 25px; /* Sağ-sol boşluk artırıldı */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,6 +35,14 @@ main.container {
 
   /* Responsive genişlik ve ölçeklendirme */
   min-width: 320px;
+  box-sizing: border-box;
+}
+
+.container ul {
+  padding-left: 20px; /* sol boşluk */
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
   box-sizing: border-box;
 }
 
@@ -206,10 +214,31 @@ main.container {
     font-size: 1.4rem;
   }
 
-  main.container {
-    max-width: 100%;
-    margin: calc(var(--header-height) + 20px) auto 0 auto;
+   main.container {
+    width: 95%;
+    max-width: none;
     padding: 15px 20px;
+  }
+
+  .about_projects_navigation,
+  .about_associations_navigation {
+    display: block;
+    max-width: 600px; /* container ile uyumlu */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;  /* Hafif iç boşluk */
+    padding-right: 15px; /* Hafif iç boşluk */
+    box-sizing: border-box;
+    color: inherit;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+
+
+  .container ul {
+    padding-left: 15px;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
@@ -221,6 +250,15 @@ main.container {
   .nav-right {
     display: flex;
   }
+}
+
+/* About sayfası alt başlıklar sağ-sol eşit boşluk */
+.about_projects_navigation,
+.about_associations_navigation {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+  display: inline-block;
 }
 
 /* CONTACT SAYFASI */
@@ -403,12 +441,13 @@ main.container {
 /* Footer */
 footer {
   text-align: center;
-  padding: 30px 0;
+  padding: 30px 25px; /* Sağ-sol boşluk artırıldı */
   font-size: 0.9rem;
   background-color: #111;
   color: #f1f1f1;
 }
 
+/* CV indirme linki */
 .cv-download-link {
   display: inline-block;
   margin-top: 20px;
