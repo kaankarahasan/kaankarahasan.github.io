@@ -1,4 +1,8 @@
 /* Sticky footer için temel yapı */
+:root {
+  --header-height: 60px; /* JS ile güncellenir */
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -11,18 +15,27 @@ html, body {
   font-size: 16px;
 }
 
-/* İçeriği saran main container */
+/* scroll kilidi sınıfı */
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* İçeriği saran main container (header yüksekliğine göre otomatik boşluk) */
 main.container {
   flex: 1;
   max-width: 600px;
   width: 90%;
-  margin: 100px auto 0 auto;
+  margin: calc(var(--header-height) + 40px) auto 0 auto;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: left;
+
+  /* Responsive genişlik ve ölçeklendirme */
+  min-width: 320px;
+  box-sizing: border-box;
 }
 
 .container section,
@@ -43,8 +56,8 @@ main.container {
   display: flex;
   justify-content: flex-start; /* Hamburger ve menü sola hizalı */
   align-items: center;
-  padding: 15px 30px;
-  z-index: 1000;
+  padding: 12px 20px;
+  z-index: 1002; /* menüden üstte kalacak */
   border-bottom: none;
 }
 
@@ -54,6 +67,7 @@ main.container {
   justify-content: space-between;
   align-items: center;
   flex: 1;
+  gap: 20px;
 }
 
 .nav-left,
@@ -71,6 +85,7 @@ main.container {
   text-decoration: none;
   display: flex;
   align-items: center;
+  outline: none;
 }
 
 .nav-right a i {
@@ -87,23 +102,35 @@ main.container {
   color: #0a84ff;
 }
 
-/* Hamburger Menü Butonu */
+/* Hamburger Menü Butonu (buton ile erişilebilir) */
 .hamburger {
   display: none; /* Desktop'ta gizli */
   flex-direction: column;
   cursor: pointer;
-  width: 30px;
-  height: 22px;
-  justify-content: space-between;
-  margin-right: 20px; /* Menüden biraz ayrık */
+  width: 36px;
+  height: 28px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 12px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+
+.hamburger:focus {
+  outline: 2px solid #0a84ff;
+  border-radius: 4px;
 }
 
 .hamburger span {
   display: block;
-  height: 4px;
+  width: 22px;
+  height: 3px;
   background-color: #f1f1f1;
   border-radius: 2px;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
+  margin: 2px 0;
 }
 
 /* Mobil görünüm */
@@ -117,39 +144,82 @@ main.container {
     flex-direction: column;
     align-items: center;
     position: fixed;
-    top: 60px; /* header yüksekliği */
-    left: 0;
-    right: 0;
+    top: var(--header-height);
+    left: 50%;
+    transform: translateX(-50%);
     background-color: #111;
-    padding: 15px 0;
-    gap: 15px;
-    border-top: 1px solid #222;
-    z-index: 999;
+    padding: 20px 25px;
+    gap: 18px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    max-height: 70vh;
+    width: 90%;
+    max-width: 350px;
+    overflow-y: auto;
+    z-index: 1001;
   }
 
   .nav-menu.active {
     display: flex;
   }
 
-  .nav-left,
-  .nav-right {
-    flex-direction: column;
-    gap: 15px;
+  /* Overlay için body üzerine ek bir karartma */
+  body.menu-open::before {
+    content: '';
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 1000;
   }
 
-  .nav-left a,
+  /* Linkler: sol liste dikey, ikonlar yatay */
+  .nav-left {
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .nav-left a {
+    padding: 8px 16px;
+    width: auto;
+    font-size: 1.05rem;
+  }
+
+  /* Nav-right ikonları her zaman yatay */
+  .nav-right {
+    flex-direction: row;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
   .nav-right a {
-    font-size: 1rem;
+    padding: 6px 10px;
   }
 
   .nav-right a i {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 
   main.container {
     max-width: 100%;
-    margin: 80px auto 0 auto;
+    margin: calc(var(--header-height) + 20px) auto 0 auto;
     padding: 15px 20px;
+  }
+}
+
+/* Masaüstü görünümü */
+@media (min-width: 601px) {
+  .nav-left {
+    display: flex;
+  }
+  .nav-right {
+    display: flex;
   }
 }
 
@@ -248,10 +318,9 @@ main.container {
   text-align: center;
 }
 
-/* Profil resmi */
 .profile-photo {
-  width: 300px;
-  height: 300px;
+  width: clamp(150px, 40vw, 300px);
+  height: clamp(150px, 40vw, 300px); /* width ile aynı clamp değerleri */
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 30px;
@@ -275,7 +344,7 @@ main.container {
 .intro-heading,
 .about-heading,
 .blog-heading {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 5vw, 2rem);
   margin-bottom: 20px;
 }
 
@@ -290,7 +359,7 @@ main.container {
 .about-volunteer-paragraph {
   text-indent: 2em;
   line-height: 1.6;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 3.5vw, 1.1rem);
   text-align: left;
   max-width: 600px;
   margin: 0 auto 1.5rem auto;
@@ -299,7 +368,7 @@ main.container {
 .blog-paragraph,
 .projects-paragraph {
   text-align: center;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 3.5vw, 1.1rem);
   line-height: 1.6;
   margin-bottom: 1.5rem;
 }

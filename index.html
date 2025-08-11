@@ -5,30 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kaan Karahasan</title>
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
-
-  <!-- Favicon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="icon" type="image/png" href="assets/favicon.png" />
-
-  <!-- Fira Code font -->
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="header">
+  <header class="header" role="banner">
     <!-- Hamburger Menü Sol Üstte -->
-    <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
       <span></span>
       <span></span>
       <span></span>
-    </div>
+    </button>
 
     <!-- Tek kapsayıcı menü -->
-    <nav class="nav-menu" id="nav-menu">
+    <nav class="nav-menu" id="nav-menu" role="navigation" aria-label="Main navigation">
       <div class="nav-left">
         <a href="index.html#home">home</a>
         <a href="projects.html">projects</a>
@@ -53,13 +45,11 @@
 
   <main class="container">
     <img src="assets/profile.jpg" alt="Kaan Karahasan" class="profile-photo" />
-    
     <h1 class="intro-heading">hi, it's Kaan! 🖖</h1>
-
-   <p class="intro-paragraph">
-    I am a computer engineering student who enjoys building meaningful things with code. Passionate about learning, designing, and creating — especially in mobile development and backend systems. Always curious, always building.
+    <p class="intro-paragraph">
+      I am a computer engineering student who enjoys building meaningful things with code. Passionate about learning, designing, and creating — especially in mobile development and backend systems. Always curious, always building.
     </p>
-
+    <!-- Uzun içerik test etmek istersen altına çokça paragraf ekle -->
   </main>
 
   <footer>
@@ -73,7 +63,6 @@
 
     navLinks.forEach(link => {
       const linkPage = new URL(link.href).pathname + new URL(link.href).hash;
-
       if (linkPage === currentPage) {
         link.classList.add('active');
       } else {
@@ -81,18 +70,45 @@
       }
     });
 
-    // Hamburger menü aç/kapa
+    // Menü kontrolü, header yüksekliğini CSS değişkenine yazma ve scroll kilidi
+    const header = document.querySelector('.header');
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
 
-    hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-    });
+    function setHeaderHeightVar() {
+      const h = header.getBoundingClientRect().height || 60;
+      document.documentElement.style.setProperty('--header-height', h + 'px');
+    }
+    setHeaderHeightVar();
+    window.addEventListener('resize', setHeaderHeightVar);
 
-    hamburger.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
+    function toggleMenu() {
+      const opened = navMenu.classList.toggle('active');
+      if (opened) {
+        document.body.classList.add('no-scroll', 'menu-open');
+      } else {
+        document.body.classList.remove('no-scroll', 'menu-open');
+      }
+      hamburger.setAttribute('aria-expanded', opened ? 'true' : 'false');
+
+      if (opened) {
+        const first = navMenu.querySelector('.nav-left a');
+        first && first.focus();
+      } else {
+        hamburger.focus();
+      }
+    }
+
+
+      hamburger.addEventListener('click', () => {
         navMenu.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+      });
+
+    // ESC ile kapatma
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        toggleMenu();
       }
     });
   </script>

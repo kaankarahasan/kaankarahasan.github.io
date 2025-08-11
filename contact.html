@@ -10,32 +10,35 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="header">
-    <nav class="nav-left" id="nav-left">
-      <a href="index.html#home">home</a>
-      <a href="projects.html">projects</a>
-      <a href="blog.html#blog">blog</a>
-      <a href="about.html#about">about</a>
-      <a href="contact.html#contact">contact</a>
-    </nav>
+  <header class="header" role="banner">
+    <!-- Hamburger Menü Sol Üstte -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-    <!-- Hamburger Menü Butonu -->
-    <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+    <!-- Tek kapsayıcı menü -->
+    <nav class="nav-menu" id="nav-menu" role="navigation" aria-label="Main navigation">
+      <div class="nav-left">
+        <a href="index.html#home">home</a>
+        <a href="projects.html">projects</a>
+        <a href="blog.html#blog">blog</a>
+        <a href="about.html#about">about</a>
+        <a href="contact.html#contact">contact</a>
+      </div>
 
-    <nav class="nav-right">
-      <a href="https://www.instagram.com/karahasankaan/" target="_blank" aria-label="Instagram">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="https://github.com/kaankarahasan" target="_blank" aria-label="GitHub">
-        <i class="fab fa-github"></i>
-      </a>
-      <a href="https://www.linkedin.com/in/kaankarahasan" target="_blank" aria-label="LinkedIn">
-        <i class="fab fa-linkedin"></i>
-      </a>
+      <div class="nav-right">
+        <a href="https://www.instagram.com/karahasankaan/" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://github.com/kaankarahasan" target="_blank" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/kaankarahasan" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </div>
     </nav>
   </header>
 
@@ -95,13 +98,12 @@
   </script>
 
   <script>
-    // Navbar aktif link vurgulama
+    // Aktif sayfa navbar vurgulama
     const navLinks = document.querySelectorAll('.nav-left a');
     const currentPage = window.location.pathname + window.location.hash;
 
     navLinks.forEach(link => {
       const linkPage = new URL(link.href).pathname + new URL(link.href).hash;
-
       if (linkPage === currentPage) {
         link.classList.add('active');
       } else {
@@ -109,18 +111,45 @@
       }
     });
 
-    // Hamburger menü aç/kapa
+    // Menü kontrolü, header yüksekliğini CSS değişkenine yazma ve scroll kilidi
+    const header = document.querySelector('.header');
     const hamburger = document.getElementById('hamburger');
-    const navLeft = document.getElementById('nav-left');
+    const navMenu = document.getElementById('nav-menu');
 
-    hamburger.addEventListener('click', () => {
-      navLeft.classList.toggle('active');
-    });
+    function setHeaderHeightVar() {
+      const h = header.getBoundingClientRect().height || 60;
+      document.documentElement.style.setProperty('--header-height', h + 'px');
+    }
+    setHeaderHeightVar();
+    window.addEventListener('resize', setHeaderHeightVar);
 
-    hamburger.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        navLeft.classList.toggle('active');
+    function toggleMenu() {
+      const opened = navMenu.classList.toggle('active');
+      if (opened) {
+        document.body.classList.add('no-scroll', 'menu-open');
+      } else {
+        document.body.classList.remove('no-scroll', 'menu-open');
+      }
+      hamburger.setAttribute('aria-expanded', opened ? 'true' : 'false');
+
+      if (opened) {
+        const first = navMenu.querySelector('.nav-left a');
+        first && first.focus();
+      } else {
+        hamburger.focus();
+      }
+    }
+
+
+      hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+      });
+
+    // ESC ile kapatma
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        toggleMenu();
       }
     });
   </script>
