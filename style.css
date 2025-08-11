@@ -117,29 +117,24 @@ main.container {
     flex-direction: column;
     align-items: center;
     position: fixed;
-    top: 0; /* header ile birleşsin */
+    top: 60px; /* header yüksekliği */
     left: 0;
     right: 0;
     background-color: #111;
-    padding: 75px 0 15px 0; /* üst boşluk hamburger+header için */
+    padding: 15px 0;
     gap: 15px;
-    border-top: none;
-    z-index: 9999; /* içerik üzerine çık */
+    border-top: 1px solid #222;
+    z-index: 999;
   }
 
   .nav-menu.active {
     display: flex;
   }
 
-  .nav-left {
+  .nav-left,
+  .nav-right {
     flex-direction: column;
     gap: 15px;
-  }
-
-  /* Nav-right ikonları her zaman yatay */
-  .nav-right {
-    flex-direction: row;
-    gap: 20px;
   }
 
   .nav-left a,
