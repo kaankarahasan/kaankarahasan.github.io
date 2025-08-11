@@ -1,4 +1,4 @@
-# kaan-karahasan.github.io
+# kaankarahasan.github.io
 
 This is the personal portfolio website of **Kaan Karahasan**, a computer engineering student with a passion for mobile development, backend systems, and creative coding. The site serves as a central hub to showcase selected projects, share blog posts, and provide ways to connect.
 
